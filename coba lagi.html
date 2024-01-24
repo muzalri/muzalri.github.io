@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Buttons</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      transition: background 0.5s;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #textContainer {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #buttonContainer {
+      display: flex;
+      gap: 10px;
+    }
+
+    .randomButton, #textContainer p {
+      padding: 10px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.5s;
+    }
+
+    .randomButton:hover, #textContainer p:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div id="textContainer">
+    <p>Maafin kita ya muthh <span>&#128591;</span></p>
+  </div>
+
+  <div id="buttonContainer">
+    <button onclick="button1Click()" class="randomButton">GAK</button>
+    <button onclick="button2Click()" class="randomButton">Iya :D</button>
+  </div>
+
+  <script>
+    let textIndex = 0;
+    const textOptions = [
+      "This is the centered text.",
+      "Yakin",
+      "Janji masih mau temenan sama kita",
+      "JANJI!"
+    ];
+
+    function button1Click() {
+      const button1 = document.querySelector('.randomButton');
+      const randomX = Math.floor(Math.random() * window.innerWidth);
+      const randomY = Math.floor(Math.random() * window.innerHeight);
+      button1.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    function button2Click() {
+      const textContainer = document.getElementById('textContainer');
+      const body = document.body;
+
+      if (textIndex < textOptions.length - 1) {
+        textIndex++;
+      } else {
+        body.style.background = "url('BESTAI.png')";
+        body.style.backgroundSize = "cover";
+        playMusic();
+        
+        const buttonContainer = document.getElementById('buttonContainer');
+        if (buttonContainer) {
+          buttonContainer.style.display = 'none';
+        }
+      }
+
+      textContainer.innerHTML = `<p>${textOptions[textIndex]}</p>`;
+    }
+
+    function playMusic() {
+      const audio = new Audio('kepompong.mp3');
+      audio.play();
+    }
+  </script>
+</body>
+</html>
